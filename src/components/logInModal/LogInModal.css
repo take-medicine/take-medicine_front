@@ -1,0 +1,24 @@
+.log-in__modal {
+    background-color: var(--white);
+    border-radius: var(--border-radius-card);
+    height: 296px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.log-in__tilte {
+    font-family: var(--montserrat);
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+    color: var(--black);
+}
+
+.log-in__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-button);
+}
