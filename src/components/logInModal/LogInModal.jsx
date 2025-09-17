@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './LogInModal.css';
-import InputField from "../../inputField/InputField";
+import InputField from '../inputField/InputField';
 import Button from '../button/Button';
 
 export default function LogInModal({ onClose, /*onLoginSuccess*/ onGoToRegister}) {
@@ -36,7 +36,7 @@ export default function LogInModal({ onClose, /*onLoginSuccess*/ onGoToRegister}
                  onLoginSuccess(data);
                  } else {
                  setMessage(data.message || 'Error al iniciar sesión. Inténtalo de nuevo.');
-             }
+            // }
 
 
         } catch (error) {
