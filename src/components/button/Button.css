@@ -1,0 +1,48 @@
+.btn {
+    font-family: var(--montserrat);
+    font-size: var(--button-size);
+    font-weight: var(--button-weight);
+    border-radius: var(--border-radius-button);
+    min-width: 110px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  /* Variantes */
+  .btn-primary {
+    background-color: var(--primary-500);
+    color: var(--white);
+    border: none;
+  }
+  
+  .btn-secondary {
+    background-color: var(--neutral-500);
+    color: var(--black);
+    border: none;
+  }
+  
+  /* Hovers */
+  .btn-primary:hover {
+    background-color: var(--primary-250);
+    color: var(--black);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--neutral-250);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Active */
+
+  .btn-primary:active {
+    background-color: var(--primary-750);
+    color: var(--white);
+    transform: translateY(1px);
+  }
+
+  .btn-secondary:active {
+    background-color: var(--neutral-750);
+    color: var(--white);
+    transform: translateY(1px);
+  }
