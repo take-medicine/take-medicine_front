@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './LogInModal.css';
-import InputField from "../../inputField/InputField";
+import InputField from "../inputField/InputField.jsx";
 import Button from '../button/Button';
 
 export default function LogInModal({ onClose, /*onLoginSuccess*/ onGoToRegister}) {

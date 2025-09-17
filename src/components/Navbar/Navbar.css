@@ -1,4 +1,6 @@
 .header {
+  position: sticky;
+  z-index: 2000;
   width: 100%;
   background-color: #e5e2d8;
   }

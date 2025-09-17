@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../src/components/styles/Variables.css';
 import './App.css';
-import LogInModal from './components/logInModal/LogInModal';;
+import LogInModal from './components/logInModal/LogInModal.jsx';
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
