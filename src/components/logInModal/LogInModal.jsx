@@ -23,7 +23,7 @@ export default function LogInModal({ onClose, onLoginSuccess, onGoToRegister}) {
         setIsLoading(true);
 
         try {
-            // Líneas comentadas para la conexión con el backend
+            // waiting for backend
             // const response = await fetch('https://tu-api.com/login', {
             //     method: 'POST',
             //     headers: { 'Content-Type': 'application/json' },
@@ -38,14 +38,12 @@ export default function LogInModal({ onClose, onLoginSuccess, onGoToRegister}) {
             //     setMessage(data.message || 'Error al iniciar sesión. Inténtalo de nuevo.');
             // }
 
-            // Simulación de un proceso de carga
-            setTimeout(() => {
-                setMessage('Conexión con el backend comentada. ¡Formulario listo!');
-                setIsLoading(false);
-            }, 1000);
+            // Lógica para cuando no tienes backend
+            setMessage('Formulario validado. Listo para conectar con el backend.');
 
         } catch (error) {
             setMessage('No se pudo conectar con el servidor.');
+        } finally {
             setIsLoading(false);
         }
     };
