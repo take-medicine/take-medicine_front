@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import '../src/components/styles/Variables.css';
 import './App.css';
+import LogInPage from './pages/LogInPage';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+
+const RECAPTCHA_SITE_KEY = "6Lduq8wrAAAAALArzaoXKVG4QmBVgfhvQ4wxjL9m";
+
+function App() {
 import LogInModal from './components/logInModal/LogInModal.jsx';
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -28,6 +34,10 @@ export default function App() {
   const [user, setUser] = useState(null);
 
   return (
+    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+      <LogInPage />
+    </GoogleReCaptchaProvider>
+  )
     <BrowserRouter>
       <Navbar user={user} />
       <main>
