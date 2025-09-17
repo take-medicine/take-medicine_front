@@ -113,6 +113,29 @@
     align-items: center;
     gap: 16px;
     margin-top: var(--space-button);
+    margin-bottom: var(--space-card)
+}
+.signin-modal__footer {
+    text-align: center;
+    width: 100%;
+}
+
+.signin-modal__footer-text {
+    font-family: var(--montserrat);
+    font-size: var(--body-size);
+    color: var(--black);
+}
+
+.login-link {
+    background: none;
+    border: none;
+    font-family: var(--montserrat);
+    font-size: var(--button-size);
+    font-weight: var(--button-weight); 
+    color: var(--black);
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
 }
   
   .error-text {
