@@ -6,21 +6,46 @@ import Button from "../button/Button";
 export default function SignInModal({ onCancel, onSave }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [preview, setPreview] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     
-    // See password for validation
+    // Observa el valor de la contraseña para validar la confirmación
     const password = watch("password");
 
-    // Password encrypted with btoa method
-        const onSubmit = (data) => {
-            const encryptedData = {
-            ...data,
-            password: btoa(data.password), // Encrypt password
-            confirmPassword: undefined, // dont send confirmPassword
-            imagen: data.imagen[0] // just the file, not the FileList
-            };
+    const onSubmit = async (data) => {
+        setIsLoading(true);
+
+        try {
+            //  "FormData" to send data to backend
+            const formData = new FormData();
+            formData.append("nombre", data.name);
+            formData.append("email", data.email);
+            formData.append("password", data.password);
+            formData.append("imagen", data.image[0]); 
+            // ----------------------------------------------------------------
+            //  waiting for backend 
+            // ----------------------------------------------------------------
+            // const response = await fetch("https://tu-api.com/register", {
+            //     method: "POST",
+            //     body: formData,
+            // });
+
+            // if (response.ok) {
+            //     const result = await response.json();
+            //     if (onSave) onSave(result);
+            // } else {
+            //     console.error("Error en el registro:", await response.text());
+            // }
             
-            if (onSave) onSave(encryptedData);
-            };
+            // Not final-waiting for backend.
+            console.log("Formulario validado, listo para el backend.");
+            if (onSave) onSave(data);
+
+        } catch (error) {
+            console.error("Error al procesar el formulario:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
@@ -38,87 +63,89 @@ export default function SignInModal({ onCancel, onSave }) {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="signin-modal__form">
                     
-                    {/* Upload image */}
                     <div className="signin-modal__form-body">
-                    <div className="signin-modal__image-section">
-                        <label className="signin-modal__image-label">
-                            {preview ? (
-                                <img src={preview} alt="Preview" className="signin-modal__image" />
-                            ) : (
-                                <div className="signin-modal__image-placeholder">
-                                    <div>📁</div>
-                                    <span>Seleccionar imagen</span>
-                                </div>
+                        {/* Upload image */}
+                        <div className="signin-modal__image-section">
+                            <label className="signin-modal__image-label">
+                                {preview ? (
+                                    <img src={preview} alt="Vista previa de la imagen" className="signin-modal__image" />
+                                ) : (
+                                    <div className="signin-modal__image-placeholder">
+                                        <div>📁</div>
+                                        <span>Seleccionar imagen</span>
+                                    </div>
+                                )}
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    {...register("image", { 
+                                        required: "La imagen es obligatoria" 
+                                    })}
+                                    onChange={handleImageChange}
+                                    className="signin-modal__image-input"
+                                />
+                            </label>
+                            {errors.imagen && (
+                                <small className="error-text">{errors.imagen.message}</small>
                             )}
-                            <input
-                                type="file"
-                                accept="image/*"
-                                {...register("imagen", { 
-                                    required: "La imagen es obligatoria" 
+                        </div>
+
+                        {/* Campos del formulario */}
+                        <div className="signin-modal__fields">
+                            <InputField
+                                label="Nombre"
+                                placeholder="Ej.: Miranda López"
+                                {...register("name", { 
+                                    required: "El nombre es obligatorio",
+                                    minLength: { value: 2, message: "Mínimo 2 caracteres" }
                                 })}
-                                onChange={handleImageChange}
-                                className="signin-modal__image-input"
-                            />
-                        </label>
-                        {errors.imagen && (
-                            <small className="error-text">{errors.imagen.message}</small>
-                        )}
-                    </div>
+                                error={errors.nombre?.message}/>  
 
-                    {/* Form */}
-                    <div className="signin-modal__fields">
-                        <InputField
-                            label="Nombre"
-                            placeholder="Ej.: Miranda López"
-                            {...register("nombre", { 
-                                required: "El nombre es obligatorio",
-                                minLength: { value: 2, message: "Mínimo 2 caracteres" }
-                            })}
-                            error={errors.nombre?.message}/>  
+                            <InputField
+                                label="Correo electrónico"
+                                placeholder="Ej.: dramiranda@email.com"
+                                type="email"
+                                {...register("email", {
+                                    required: "El correo es obligatorio",
+                                    pattern: {
+                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                        message: "Introduce un correo válido"
+                                    }
+                                })}
+                                error={errors.email?.message}/>
 
-                        <InputField
-                            label="Correo electrónico"
-                            placeholder="Ej.: dramiranda@email.com"
-                            type="email"
-                            {...register("email", {
-                                required: "El correo es obligatorio",
-                                pattern: {
-                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                    message: "Introduce un correo válido"
-                                }
-                            })}
-                            error={errors.email?.message}/>
+                            <InputField
+                                label="Contraseña"
+                                type="password"
+                                placeholder="••••••••"
+                                {...register("password", {
+                                    required: "La contraseña es obligatoria",
+                                    minLength: { value: 8, message: "Mínimo 8 caracteres" },
+                                    pattern: {
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+                                        message: "Debe contener mayúscula, minúscula y número"
+                                    }
+                                })}
+                                error={errors.password?.message}/>
 
-                        <InputField
-                            label="Contraseña"
-                            type="password"
-                            placeholder="••••••••"
-                            {...register("password", {
-                                required: "La contraseña es obligatoria",
-                                minLength: { value: 8, message: "Mínimo 8 caracteres" },
-                                pattern: {
-                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                                    message: "Debe contener mayúscula, minúscula y número"
-                                }
-                            })}
-                            error={errors.password?.message}/>
-
-                        <InputField
-                            label="Confirmar contraseña"
-                            type="password"
-                            placeholder="••••••••"
-                            {...register("confirmPassword", {
-                                required: "Debes confirmar la contraseña",
-                                validate: value => 
-                                    value === password || "Las contraseñas no coinciden"
-                            })}
-                            error={errors.confirmPassword?.message}/>
-                    </div>
+                            <InputField
+                                label="Confirmar contraseña"
+                                type="password"
+                                placeholder="••••••••"
+                                {...register("confirmPassword", {
+                                    required: "Debes confirmar la contraseña",
+                                    validate: value => 
+                                        value === password || "Las contraseñas no coinciden"
+                                })}
+                                error={errors.confirmPassword?.message}/>
+                        </div>
                     </div>
 
                     <div className="signin-modal__buttons">
                         <Button variant="secondary" type="button" onClick={onCancel}>Cancelar</Button>
-                        <Button variant="primary" type="submit">Registrarse</Button>
+                        <Button variant="primary" type="submit" disabled={isLoading}>
+                            {isLoading ? 'Registrando...' : 'Registrarse'}
+                        </Button>
                     </div>
                 </form>
             </div>
