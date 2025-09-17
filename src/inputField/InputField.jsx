@@ -14,14 +14,14 @@ export default function InputField({ label, placeholder, type = "text", error, .
                 <input
                     type={inputType}
                     placeholder={placeholder}
-                    className={`input-field__input ${error ? "input-error" : ""}`}                
+                    className={`input-field__input ${error ? "input-error" : ""}`}
                     {...props}
                 />
                 
                 {type === 'password' && (
                     <button 
                         type="button" 
-                        className="input-field__toggle-password" 
+                        className="input-field__toggle-eye" 
                         onClick={() => setShowPassword(!showPassword)}
                     >
                         {showPassword ? <EyeClosed size={20} /> : <Eye size={20} />}
@@ -29,7 +29,7 @@ export default function InputField({ label, placeholder, type = "text", error, .
                 )}
             </div>
             {error && <span className="input-field__error">{error}</span>}
-        </div>     
+        </div>
     );
 
 }
