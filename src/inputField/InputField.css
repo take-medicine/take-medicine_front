@@ -20,7 +20,7 @@
 .input-field__input {
   width: auto;
   height: 100%;
-  border: 2px solid var(--neutral-750);
+  border: 2px solid var(--primary-500);
   border-radius: var(--border-radius-card);
   padding: 0 8px;
   font-size: var(--body-size);
