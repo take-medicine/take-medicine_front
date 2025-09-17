@@ -20,7 +20,7 @@ export default function LogInPage() {
 
     return (
         <div className="log-in__page">
-            
+           
             {isModalOpen && (
                 <LogInModal
                     onClose={handleCloseModal}
