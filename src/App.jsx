@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../src/components/styles/Variables.css';
 import './App.css';
+import LogInModal from './components/logInModal/LogInModal';;
 import Navbar from "./components/Navbar/Navbar.jsx";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/calendar" element={<Calendar />} />
         </Routes>
       </main>
+    <LogInModal></LogInModal>
     </BrowserRouter>
     
   );

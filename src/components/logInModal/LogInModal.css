@@ -1,0 +1,65 @@
+.log-in__modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.log-in__modal {
+    background-color: var(--white);
+    border-radius: var(--border-radius-card);
+    width: 300px;
+    padding: 20px 28px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.log-in__title {
+    font-family: var(--montserrat);
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
+    color: var(--black);
+    margin-bottom: var(--space-section);
+}
+
+.log-in__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-button); 
+    margin-bottom: var(--space-card);
+}
+
+.log-in__buttons {
+    margin-bottom: var(--space-card);
+}
+
+.log-in__footer {
+    text-align: center;
+    width: 100%;
+}
+
+.log-in__footer-text {
+    font-family: var(--montserrat);
+    font-size: var(--body-size);
+    color: var(--black);
+}
+
+.register-link {
+    background: none;
+    border: none;
+    font-family: var(--montserrat);
+    font-size: var(--button-size);
+    font-weight: var(--button-weight); 
+    color: var(--black);
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
