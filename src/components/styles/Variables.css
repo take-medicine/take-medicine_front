@@ -57,7 +57,7 @@
 
    /* ⚙️ Border radius */
    --border-radius-button: 50px;
-   --border-radius-card: 12px;
-   --border-radius-img: 8px;
+   --border-radius-card: 8px;
+   --border-radius-img: 4px;
 
 }
