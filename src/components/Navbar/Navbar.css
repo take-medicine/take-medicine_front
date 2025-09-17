@@ -1,0 +1,49 @@
+.header {
+  width: 100%;
+  background-color: #e5e2d8;
+  }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.left {
+  font-family: "Playball";
+  color: var(--primary-500);
+  font-size: 2.5rem;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert {
+  background-color: var(--primary-500);
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.alert:hover {
+  opacity: 0.9;
+}
+
+.btn-login img {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-loggedin {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}

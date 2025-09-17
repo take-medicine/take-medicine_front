@@ -30,7 +30,8 @@
 
    /* ✍️ Typography (Montserrat) */
        --montserrat: "Montserrat", sans-serif;
-     
+       --playball: "Playball";
+       
        --h1-size: 32px;
        --h1-weight: 700;
      
@@ -45,6 +46,8 @@
      
        --button-size: 16px;
        --button-weight: 500;
+
+
 
    /* 📏 Spacing */
    --space-section: 40px; /* between sections*/
