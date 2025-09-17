@@ -1,47 +1,61 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import './SignInModal.css';
 import InputField from "../inputField/InputField";
 import Button from "../button/Button";
 
-export default function SignInModal({ onCancel, onSave }) {
+export default function SignInModal({ onClose, onSuccess, onGoToLogin }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
     const [preview, setPreview] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [message, setMessage] = useState('');
     
-    // Observa el valor de la contraseña para validar la confirmación
     const password = watch("password");
 
     const onSubmit = async (data) => {
         setIsLoading(true);
+        setMessage('');
 
         try {
-            //  "FormData" to send data to backend
+            console.log('Datos de registro:', data);
+            
+            // Preparar FormData para envío con imagen
             const formData = new FormData();
-            formData.append("nombre", data.name);
+            formData.append("name", data.name);
             formData.append("email", data.email);
             formData.append("password", data.password);
-            formData.append("imagen", data.image[0]); 
-            // ----------------------------------------------------------------
-            //  waiting for backend 
-            // ----------------------------------------------------------------
-            // const response = await fetch("https://tu-api.com/register", {
-            //     method: "POST",
-            //     body: formData,
-            // });
+            if (data.image && data.image[0]) {
+                formData.append("image", data.image[0]);
+            }
 
-            // if (response.ok) {
-            //     const result = await response.json();
-            //     if (onSave) onSave(result);
-            // } else {
-            //     console.error("Error en el registro:", await response.text());
-            // }
-            
-            // Not final-waiting for backend.
-            console.log("Formulario validado, listo para el backend.");
-            if (onSave) onSave(data);
+            // Aquí irá tu llamada al backend
+            /*
+            const response = await fetch('https://tu-api.com/register', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                onSuccess(result);
+            } else {
+                setMessage(result.message || 'Error al registrarse. Inténtalo de nuevo.');
+            }
+            */
+
+            // Simulación temporal 
+            setTimeout(() => {
+                onSuccess({ 
+                    name: data.name, 
+                    email: data.email,
+                    id: Date.now() // ID simulado
+                });
+            }, 1500);
 
         } catch (error) {
             console.error("Error al procesar el formulario:", error);
+            setMessage('No se pudo conectar con el servidor.');
         } finally {
             setIsLoading(false);
         }
@@ -55,11 +69,17 @@ export default function SignInModal({ onCancel, onSave }) {
     };
 
     return (
-        <div className="signin-modal">            
-            <div className="signin-modal__content">
+        <div className="signin-modal" onClick={onClose}>
+            <div className="signin-modal__content" onClick={e => e.stopPropagation()}>
                 <div className="signin-modal__title">
                     <h2>Regístrate</h2>
                 </div>
+
+                {message && (
+                    <div className={`signin-modal__message ${message.includes('exitoso') ? 'success' : 'error'}`}>
+                        {message}
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit(onSubmit)} className="signin-modal__form">
                     
@@ -85,21 +105,21 @@ export default function SignInModal({ onCancel, onSave }) {
                                     className="signin-modal__image-input"
                                 />
                             </label>
-                            {errors.imagen && (
-                                <small className="error-text">{errors.imagen.message}</small>
+                            {errors.image && (
+                                <small className="error-text">{errors.image.message}</small>
                             )}
                         </div>
 
-                        {/* Campos del formulario */}
                         <div className="signin-modal__fields">
                             <InputField
                                 label="Nombre"
                                 placeholder="Ej.: Miranda López"
-                                {...register("name", { 
+                                {...register("name", {
                                     required: "El nombre es obligatorio",
                                     minLength: { value: 2, message: "Mínimo 2 caracteres" }
                                 })}
-                                error={errors.nombre?.message}/>  
+                                error={errors.name?.message}
+                            />  
 
                             <InputField
                                 label="Correo electrónico"
@@ -112,7 +132,8 @@ export default function SignInModal({ onCancel, onSave }) {
                                         message: "Introduce un correo válido"
                                     }
                                 })}
-                                error={errors.email?.message}/>
+                                error={errors.email?.message}
+                            />
 
                             <InputField
                                 label="Contraseña"
@@ -120,13 +141,10 @@ export default function SignInModal({ onCancel, onSave }) {
                                 placeholder="••••••••"
                                 {...register("password", {
                                     required: "La contraseña es obligatoria",
-                                    minLength: { value: 8, message: "Mínimo 8 caracteres" },
-                                    pattern: {
-                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
-                                        message: "Debe contener mayúscula, minúscula y número"
-                                    }
+                                    minLength: { value: 8, message: "Mínimo 8 caracteres" }
                                 })}
-                                error={errors.password?.message}/>
+                                error={errors.password?.message}
+                            />
 
                             <InputField
                                 label="Confirmar contraseña"
@@ -137,17 +155,41 @@ export default function SignInModal({ onCancel, onSave }) {
                                     validate: value => 
                                         value === password || "Las contraseñas no coinciden"
                                 })}
-                                error={errors.confirmPassword?.message}/>
+                                error={errors.confirmPassword?.message}
+                            />
                         </div>
                     </div>
 
                     <div className="signin-modal__buttons">
-                        <Button variant="secondary" type="button" onClick={onCancel}>Cancelar</Button>
-                        <Button variant="primary" type="submit" disabled={isLoading}>
+                        <Button 
+                            variant="secondary" 
+                            type="button" 
+                            onClick={onGoToLogin}
+                        >
+                            Cancelar
+                        </Button>
+                        <Button 
+                            variant="primary" 
+                            type="submit" 
+                            disabled={isLoading}
+                        >
                             {isLoading ? 'Registrando...' : 'Registrarse'}
                         </Button>
                     </div>
                 </form>
+
+                <div className="signin-modal__footer">
+                    <span className="signin-modal__footer-text">
+                        ¿Ya tienes cuenta?{' '}
+                        <button
+                            type="button"
+                            className="login-link"
+                            onClick={onGoToLogin}
+                        >
+                            Inicia sesión aquí
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
     );

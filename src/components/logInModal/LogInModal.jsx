@@ -1,80 +1,96 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import './LogInModal.css';
 import InputField from '../inputField/InputField';
 import Button from '../button/Button';
 
-export default function LogInModal({ onClose, /*onLoginSuccess*/ onGoToRegister}) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
+export default function LogInModal({ onClose, onLoginSuccess, onGoToRegister }) {
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [message, setMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-
+    const onSubmit = async (data) => {
         setMessage('');
-
-        if (!email || !password) {
-            setMessage('Por favor, rellena todos los campos.');
-            return;
-        }
-
         setIsLoading(true);
-        /*
+
         try {
-            waiting for backend
+            // Llamada al backend
+            console.log('Datos de login:', data);
+            
+            // Simulación de llamada API
+            /*
             const response = await fetch('https://tu-api.com/login', {
-                 method: 'POST',
-                 headers: { 'Content-Type': 'application/json' },
-                 body: JSON.stringify({ email, password }),
-             });
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: data.email,
+                    password: data.password
+                }),
+            });
 
-             const data = await response.json();
+            const result = await response.json();
 
-             if (response.ok) {
-                 onLoginSuccess(data);
-                 } else {
-                 setMessage(data.message || 'Error al iniciar sesión. Inténtalo de nuevo.');
-            // }
+            if (response.ok) {
+                onLoginSuccess(result);
+            } else {
+                setMessage(result.message || 'Error al iniciar sesión. Inténtalo de nuevo.');
+            }
+            */
 
+            // Simulación temporal
+            setTimeout(() => {
+                onLoginSuccess({ email: data.email, name: 'Usuario' });
+            }, 1000);
 
         } catch (error) {
+            console.error('Error en login:', error);
             setMessage('No se pudo conectar con el servidor.');
         } finally {
             setIsLoading(false);
-        } */
+        }
     };
 
-    return(
+    return (
         <div className="log-in__modal-container" onClick={onClose}>
             <div className="log-in__modal" onClick={e => e.stopPropagation()}>
                 <div className="log-in__title">
                     <h2>Iniciar sesión</h2>
                 </div>
+
                 {message && (
-                    <div className={`log-in__message ${message.includes('validado') ? 'success' : 'error'}`}>
+                    <div className={`log-in__message ${message.includes('exitoso') ? 'success' : 'error'}`}>
                         {message}
                     </div>
                 )}
-                
-                <form onSubmit={handleSubmit}>
+
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="log-in__fields">
                         <InputField
                             type="email"
                             placeholder="Ej.: correo@correo.com"
                             label="Correo electrónico"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            {...register("email", {
+                                required: "El correo es obligatorio",
+                                pattern: {
+                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                    message: "Introduce un correo válido"
+                                }
+                            })}
+                            error={errors.email?.message}
                         />
+
                         <InputField
                             type="password"
                             placeholder="••••••••"
                             label="Contraseña"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            {...register("password", {
+                                required: "La contraseña es obligatoria",
+                                minLength: { value: 6, message: "Mínimo 6 caracteres" }
+                            })}
+                            error={errors.password?.message}
                         />
                     </div>
+
                     <div className="log-in__buttons">
                         <Button variant="primary" type="submit" disabled={isLoading}>
                             {isLoading ? 'Cargando...' : 'Iniciar sesión'}
@@ -88,7 +104,8 @@ export default function LogInModal({ onClose, /*onLoginSuccess*/ onGoToRegister}
                         <button
                             type="button"
                             className="register-link"
-                            onClick={onGoToRegister}>
+                            onClick={onGoToRegister}
+                        >
                             regístrate aquí
                         </button>
                     </span>
