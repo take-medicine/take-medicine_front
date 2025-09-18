@@ -1,0 +1,21 @@
+.medication-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+  }
+  
+  .medication-card__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .medication-card__content span:not(:first-child) {
+    color: #666;
+  }
