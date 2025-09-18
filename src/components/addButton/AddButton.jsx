@@ -3,9 +3,9 @@ import './AddButton.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons"; 
 
-export default function ButtonAdd() {
+export default function ButtonAdd( {onClick}) {
     return(
-        <button className="add">
+        <button className="add" onClick={onClick}>
             <FontAwesomeIcon icon={faPlus} className="faPlus"/>        
         </button>
 
