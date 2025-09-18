@@ -5,8 +5,22 @@ export default function TreatmentDetails( { treatment, onClose }) {
 return(
     <div className="treatment-details__overlay" onClick={onClose}>
         <div className="treatment-details__container" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
-        <div className="treatment-details__name">
-            <h3></h3>
+            <h3 className="treatment-details__name">{treatment.medicationName}</h3>
+            <p className="treatment-details__description">{treatment.description}</p>
+            <div className="treatment-details__info">
+                <span className="treament-details__subtitle">{treatment.duration}</span><span className="treament-details__subtitle"> | </span><span className="treament-details__subtitle">{treatment.dosage}</span>
+            </div>
+        <div className="treatment-details__section">
+          {treatment.time.map((time, index) => (
+            <Pill key={index} label={time} type="hour" />
+          ))}
+        </div>
+
+        <div className="treatment-details__section">
+          <p className="treament-details__subtitle">Días de la semana</p>
+          {treatment.days.map((day, index) => (
+            <Pill key={index} label={day} type="day" />
+          ))}
         </div>
         </div>
     </div>
