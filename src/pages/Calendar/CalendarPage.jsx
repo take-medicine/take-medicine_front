@@ -17,7 +17,7 @@ const CalendarPage = () => {
            
 
             <section className="calendar-topleft">
-                <h2>Lib calendario</h2>
+                <h2>Mi calendario</h2>
                 <Calendar
                 selectedDate={selectedDate}
                 onDateChange={setSelectedDate}
