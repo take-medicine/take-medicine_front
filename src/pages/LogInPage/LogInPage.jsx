@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './LogInPage.css';
 import LogInModal from "../../components/logInModal/LogInModal";
 import SignInModal from '../../components/signInModal/SignInModal';
+import {useNavigate} from 'react-router-dom';
 
 export default function LogInPage() {
     const [activeModal, setActiveModal] = useState('login');
+    const navigate = useNavigate(); 
 
     const handleCloseModal = () => {
         setActiveModal(null);
@@ -13,12 +15,13 @@ export default function LogInPage() {
     const handleLoginSuccess = (userData) => {
         console.log('Login exitoso:', userData);
         handleCloseModal();
-        // Lógica de redirección a la home
+        navigate('/');
     };
 
     const handleRegisterSuccess = (userData) => {
         console.log('Registro exitoso:', userData);
-        setActiveModal('login');
+        handleCloseModal();
+        navigate('/');
     };
 
     const handleGoToRegister = () => {
