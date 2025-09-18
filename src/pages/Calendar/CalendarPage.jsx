@@ -14,8 +14,7 @@ const CalendarPage = () => {
         <div className="page">
             <Navbar />
         <div className="calendar-container">
-           
-
+            
             <div className="calendar-left">
                 <Calendar
                 selectedDate={selectedDate}
