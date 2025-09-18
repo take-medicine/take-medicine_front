@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons"; 
 import ModalOptions from "../modalOptions/ModalOptions";
 
-export default function ButtonAdd( {onGoToTreatment, onGoToReminder}) {
+export default function AddButton( {onGoToTreatment, onGoToReminder}) {
     const [openModal, setOpenModal] = useState(false);
     
     return(
