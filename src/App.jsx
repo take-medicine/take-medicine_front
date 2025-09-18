@@ -11,9 +11,9 @@ function App() {
   return (
     <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
       <LogInPage />
+  
     </GoogleReCaptchaProvider>
-
-    
+ 
   )
 }
 
