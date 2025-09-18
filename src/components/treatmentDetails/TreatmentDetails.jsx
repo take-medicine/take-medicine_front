@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect} from "react";
 import './TreatmentDetails.css';
 import PillDetail from '../pillDetail/PillDetail';
 
 export default function TreatmentDetails({ treatment, onClose }) {
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") onClose();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [onClose]);
+
     if (!treatment) {
         return null;
     }
