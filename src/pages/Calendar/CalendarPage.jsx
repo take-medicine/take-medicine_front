@@ -11,8 +11,10 @@ const CalendarPage = () => {
     });
     
     return (
-        <div className="calendar-container">
+        <div className="page">
             <Navbar />
+        <div className="calendar-container">
+           
 
             <section className="calendar-topleft">
                 <h2>Lib calendario</h2>
@@ -33,6 +35,7 @@ const CalendarPage = () => {
                 <h2>Historial</h2>
             </section>
         </div>
+    </div>
     );
 };
 
