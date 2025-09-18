@@ -1,0 +1,18 @@
+.pill {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius-button);
+    font-family: var(--montserrat);
+    font-size: var(--button-size);
+    font-weight: var(--button-weight);
+    color: var(--neutral-750);
+}
+  
+.pill--hour {
+    background-color: var(--primary-250);
+}
+  
+.pill--day {
+    background-color: var(--secondary-250); 
+}
+  
