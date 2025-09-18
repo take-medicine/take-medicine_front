@@ -1,0 +1,26 @@
+.cal-container {
+  width: 90%;
+  max-width: 400px; 
+  height: 100%;
+}
+
+.react-calendar {
+  
+  height: 300px;
+  border: none;
+}
+
+.react-calendar__tile {
+  height: 35px;
+}
+
+.react-calendar__tile--active {
+  background-color: #258d97 !important;
+  color: white !important;
+}
+
+.has-medication {
+  background-color: #258d97;
+  color: white;
+  border-radius: 50%;
+}

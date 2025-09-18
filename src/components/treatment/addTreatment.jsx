@@ -1,75 +1,75 @@
 import { useState, useEffect } from "react";
 import styles from "./addTreatment.module.css";
 
-export default function TratamientosMenu() {
-    const [tratamientos, setTratamientos] = useState([]);
+export default function TreatmentMenu() {
+    const [Treatment, setTreatmentToday] = useState([]);
     const [form, setForm] = useState({
-        nombreTratamiento: "",
-        descripcion: "",
-        duracionDias: "",
-        horario: "",
-        dias: [],
-        dosis: "",
+        NameTreatment: "",
+        description: "",
+        durationDays: "",
+        schedule: "",
+        days: [],
+        dose: "",
     });
 
-    const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+    const week = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
     useEffect(() => {
         const saved = localStorage.getItem("tratamientos");
-        if (saved) setTratamientos(JSON.parse(saved));
+        if (saved) setTreatmentToday(JSON.parse(saved));
     }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         if (type === "checkbox") {
-            let nuevosDias = [...form.dias];
-            if (checked) nuevosDias.push(value);
-            else nuevosDias = nuevosDias.filter((d) => d !== value);
-            setForm({ ...form, dias: nuevosDias });
+            let NewDays = [...form.days];
+            if (checked) NewDays.push(value);
+            else NewDays = NewDays.filter((d) => d !== value);
+            setForm({ ...form, days: NewDays });
         } else {
             setForm({ ...form, [name]: value });
         }
     };
 
-    const guardarTratamiento = () => {
-        if (form.nombreTratamiento.trim() === "" || form.duracionDias === "" || form.dias.length === 0) {
+    const saveTreatments = () => {
+        if (form.NameTreatment.trim() === "" || form.durationDays === "" || form.days.length === 0) {
             alert("Nombre, duración y al menos un día son obligatorios.");
             return;
         }
 
         const nuevo = { id: Date.now(), ...form };
-        const nuevosTratamientos = [...tratamientos, nuevo];
-        setTratamientos(nuevosTratamientos);
-        localStorage.setItem("tratamientos", JSON.stringify(nuevosTratamientos));
+        const nuevosTratamientos = [...Treatment, nuevo];
+        setTreatmentToday(nuevosTratamientos);
+        localStorage.setItem("treatmentsDB", JSON.stringify(nuevosTratamientos));
 
         // Placeholder para guardar en DB
         console.log("SQL Placeholder: INSERT INTO tratamientos ...", nuevo);
 
         setForm({
-            nombreTratamiento: "",
-            descripcion: "",
-            duracionDias: "",
-            horario: "",
-            dias: [],
-            dosis: "",
+            NameTreatment: "",
+            description: "",
+            durationDays: "",
+            schedule: "",
+            days: [],
+            dose: "",
         });
     };
 
-    const cancelarTratamiento = () => {
+    const cancelTreatment = () => {
         setForm({
-            nombreTratamiento: "",
-            descripcion: "",
-            duracionDias: "",
-            horario: "",
-            dias: [],
-            dosis: "",
+            NameTreatment: "",
+            description: "",
+            durationDays: "",
+            schedule: "",
+            days: [],
+            dose: "",
         });
     };
 
-    const eliminarTratamiento = (id) => {
-        const nuevosTratamientos = tratamientos.filter((t) => t.id !== id);
-        setTratamientos(nuevosTratamientos);
-        localStorage.setItem("tratamientos", JSON.stringify(nuevosTratamientos));
+    const removeTreatment = (id) => {
+        const newTreatments = Treatment.filter((t) => t.id !== id);
+        setTreatmentToday(newTreatments);
+        localStorage.setItem("treatmentsDB", JSON.stringify(newTreatments));
 
         // Placeholder para eliminar en DB
         console.log("SQL Placeholder: DELETE FROM tratamientos WHERE id =", id);
@@ -84,14 +84,14 @@ export default function TratamientosMenu() {
                     type="text"
                     name="nombreTratamiento"
                     placeholder="Nombre del tratamiento"
-                    value={form.nombreTratamiento}
+                    value={form.NameTreatment}
                     onChange={handleChange}
                     className={styles.input}
                 />
                 <textarea
                     name="descripcion"
                     placeholder="Descripción"
-                    value={form.descripcion}
+                    value={form.description}
                     onChange={handleChange}
                     rows={3}
                     className={styles.textarea}
@@ -100,7 +100,7 @@ export default function TratamientosMenu() {
                     type="number"
                     name="duracionDias"
                     placeholder="Duración en días"
-                    value={form.duracionDias}
+                    value={form.durationDays}
                     onChange={handleChange}
                     min={1}
                     className={styles.input}
@@ -108,7 +108,7 @@ export default function TratamientosMenu() {
                 <input
                     type="time"
                     name="horario"
-                    value={form.horario}
+                    value={form.schedule}
                     onChange={handleChange}
                     className={styles.input}
                 />
@@ -116,13 +116,13 @@ export default function TratamientosMenu() {
                 <div>
                     <span style={{ fontWeight: "bold" }}>Días de la semana:</span>
                     <div className={styles.checkboxContainer}>
-                        {diasSemana.map((dia) => (
+                        {week.map((dia) => (
                             <label key={dia} className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
                                     name="dias"
                                     value={dia}
-                                    checked={form.dias.includes(dia)}
+                                    checked={form.days.includes(dia)}
                                     onChange={handleChange}
                                 /> {dia}
                             </label>
@@ -134,24 +134,24 @@ export default function TratamientosMenu() {
                     type="text"
                     name="dosis"
                     placeholder="Dosis (ej: 1 al día)"
-                    value={form.dosis}
+                    value={form.dose}
                     onChange={handleChange}
                     className={styles.input}
                 />
 
                 <div className={styles.buttons}>
-                    <button onClick={guardarTratamiento} className={`${styles.btn} ${styles.btnGuardar}`}>
+                    <button onClick={saveTreatments} className={`${styles.btn} ${styles.btnGuardar}`}>
                         Guardar
                     </button>
-                    <button onClick={cancelarTratamiento} className={`${styles.btn} ${styles.btnCancelar}`}>
+                    <button onClick={cancelTreatment} className={`${styles.btn} ${styles.btnCancelar}`}>
                         Cancelar
                     </button>
                 </div>
             </div>
 
             <ul className={styles.lista}>
-                {tratamientos.length === 0 && <li className={styles.noTratamientos}>No hay tratamientos añadidos</li>}
-                {tratamientos.map((t) => (
+                {Treatment.length === 0 && <li className={styles.noTratamientos}>No hay tratamientos añadidos</li>}
+                {Treatment.map((t) => (
                     <li key={t.id} className={styles.listaItem}>
                         <div className={styles.listaItemInfo}>
                             <strong>{t.nombreTratamiento}</strong> - {t.descripcion}<br />
@@ -159,7 +159,7 @@ export default function TratamientosMenu() {
                             Días: {t.dias.join(", ")}
                         </div>
                         <button
-                            onClick={() => eliminarTratamiento(t.id)}
+                            onClick={() => removeTreatment(t.id)}
                             className={styles.btnEliminar}
                         >
                             X
