@@ -1,11 +1,13 @@
 .widget-container {
-    width: 496px;
     background-color: var(--primary-250);
     border-radius: var(--border-radius-card);
     padding: 20px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     margin: 16px 0;
     font-family: var(--montserrat);
+    border-radius: var(--border-radius-card);
+    width: 100%;
+    max-width: 28rem;
   }
   
   .widget-header {

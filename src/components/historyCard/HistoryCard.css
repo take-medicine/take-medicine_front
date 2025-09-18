@@ -1,8 +1,8 @@
 
 .historial-container {
   background-color: var(--secondary-500); 
-  border-radius: 1rem;
-  padding: 1.5rem;
+  border-radius: var(--border-radius-card);
+  padding: 20px;
   width: 100%;
   max-width: 28rem;
   font-family: var(--montserrat);
