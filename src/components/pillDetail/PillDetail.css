@@ -1,27 +1,44 @@
 .pill {
-    display: inline-block;
-    padding: 0.4rem 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
     border-radius: var(--border-radius-button);
     font-family: var(--montserrat);
     font-size: var(--button-size);
     font-weight: var(--button-weight);
     color: var(--neutral-750);
     text-align: center;
-    width: auto;
-    height: 24px;
+    white-space: nowrap;
+    min-height: 32px; 
+    box-sizing: border-box;
 }
-  
+
 .pill--time {
     background-color: var(--primary-250);
+    margin-right: 8px;
+    margin-bottom: 0;
 }
-  
+
 .pill--day {
-    background-color: var(--secondary-250); 
+    background-color: var(--secondary-250);
+    margin-bottom: 8px;
+}
+
+.treatment-details__section:last-child {
+    flex-direction: row;
+}
+
+.treatment-details__section:last-child > div {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 4px;
 }
 
 @media (max-width: 320px) {
     .treatment-details__container {
         width: 280px;
-        padding: 12px 16px 16px;
+        padding: 16px;
     }
 }

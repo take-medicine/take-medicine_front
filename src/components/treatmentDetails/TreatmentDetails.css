@@ -1,3 +1,4 @@
+/* TreatmentDetails.css */
 .treatment-details__overlay {
     position: fixed;
     inset: 0;
@@ -11,54 +12,62 @@
 .treatment-details__container {
     width: 294px;
     min-height: 294px;
-    max-height: 80vh; 
-    overflow-y: auto; 
+    max-height: 80vh;
+    overflow-y: auto;
     background-color: var(--white);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: var(--border-radius-card);
     font-family: var(--montserrat);
     color: var(--neutral-750);
-    padding: 12px 20px 20px;
+    padding: 20px; /* Simplificado */
     display: flex;
     flex-direction: column;
-    
-    gap: 12px;
+    gap: 16px; /* Más espacio entre secciones */
 }
 
 .treatment-details__name {
-    font-size: var(--h3-size);
-    font-weight: var(--h3-weight);
+    font-size: var(--h2-size);
+    font-weight: var(--h2-weight);
     margin: 0;
-    justify-content: left;
+    text-align: left;
+    line-height: 1.2;
 }
 
 .treatment-details__description {
     font-size: var(--body-size);
     font-weight: var(--body-weight);
-    align-items: left;
     margin: 0;
+    text-align: left;
+    line-height: 1.4;
 }
 
 .treatment-details__subtitle {
     font-size: var(--button-size);
-    font-weight: var(--button-weight);
+    font-weight: var(--h3-weight);
     margin: 0;
+    color: var(--neutral-750);
 }
 
 .treatment-details__info {
     display: flex;
     align-items: center;
     gap: 4px;
-    padding: 8px 12px;
 }
 
+/* time section */
 .treatment-details__section {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+    align-items: flex-start;
+}
+
+/* days section */
+.treatment-details__section:last-child {
+    flex-direction: row;
     gap: var(--space-s);
 }
 
-.treatment-details__section .treatment-details__subtitle {
-    margin-bottom: 4px;
-    color: var(--neutral-750);
+.treatment-details__section:last-child .treatment-details__subtitle {
+    margin-bottom: 8px;
 }
