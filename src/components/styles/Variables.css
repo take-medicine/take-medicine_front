@@ -17,7 +17,7 @@
 
        /* Neutral */
        --neutral-250: #f7f5f2;
-       --neutral-500: #e5e2d8;
+       --neutral-500: #e5dbd8;
        --neutral-750: #21272a;
 
        --black: #000000;
@@ -31,7 +31,6 @@
    /* ✍️ Typography (Montserrat) */
        --montserrat: "Montserrat", sans-serif;
        --playball: "Playball";
-       
        --h1-size: 32px;
        --h1-weight: 700;
      

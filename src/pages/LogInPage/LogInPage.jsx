@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './LogInPage.css';
-import LogInModal from "../components/logInModal/LogInModal";
-import SignInModal from '../components/signInModal/SignInModal';
+import LogInModal from "../../components/logInModal/LogInModal";
+import SignInModal from '../../components/signInModal/SignInModal';
 
 export default function LogInPage() {
     const [activeModal, setActiveModal] = useState('login');
