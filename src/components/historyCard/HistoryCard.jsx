@@ -7,8 +7,8 @@ const HistorialTratamientos = ({
   className = "",
   loading = false,
   error = null,
-  size = "normal", // small, normal, large
-  theme = "orange" // orange, blue, green, purple
+  size = "normal", 
+  theme = "orange" 
 }) => {
 
   const formatearFecha = (fecha) => {
@@ -206,8 +206,6 @@ export const HistorialTratamientosContainer = ({
       onClickTratamiento(tratamiento);
     } else {
       console.log('Tratamiento seleccionado:', tratamiento);
-      // Aquí puedes navegar a otra página, abrir modal, etc.
-      // router.push(`/tratamiento/${tratamiento.id}`);
     }
   };
 
@@ -224,58 +222,4 @@ export const HistorialTratamientosContainer = ({
   );
 };
 
-// Componente de ejemplo para desarrollo
-const EjemploHistorial = () => {
-  const tratamientosEjemplo = [
-    {
-      id: 1,
-      medicamento: "Zoomig",
-      condicion: "Migrañas",
-      tipo: "Crónico",
-      fechaInicio: "2024-01-15",
-      fechaFin: "2024-02-28",
-      estado: "completado"
-    },
-    {
-      id: 2,
-      medicamento: "Ibuprofeno",
-      condicion: "Dolor",
-      tipo: "Agudo",
-      fechaInicio: "2024-03-01",
-      fechaFin: null,
-      estado: "activo"
-    }
-  ];
-
-  return (
-    <div style={{ padding: '2rem', backgroundColor: '#f3f4f6', minHeight: '100vh' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        Componente Historial de Tratamientos
-      </h1>
-      
-      <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-        {/* Ejemplo normal */}
-        <HistorialTratamientos 
-          tratamientos={tratamientosEjemplo}
-          onClickTratamiento={(t) => alert(`Seleccionado: ${t.medicamento}`)}
-        />
-        
-        {/* Ejemplo cargando */}
-        <HistorialTratamientos 
-          loading={true}
-          theme="blue"
-        />
-        
-        {/* Ejemplo vacío */}
-        <HistorialTratamientos 
-          tratamientos={[]}
-          theme="green"
-          size="small"
-        />
-      </div>
-    </div>
-  );
-};
-
 export default HistorialTratamientos;
-export { EjemploHistorial };
