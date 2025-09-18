@@ -1,6 +1,6 @@
 
 .historial-container {
-  background-color: #FBAC63; 
+  background-color: var(--secondary-500); 
   border-radius: 1rem;
   padding: 1.5rem;
   width: 100%;
