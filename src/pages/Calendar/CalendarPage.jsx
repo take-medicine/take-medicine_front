@@ -3,6 +3,7 @@ import "./CalendarPage.css";
 import Calendar from "../../components/calendar/Calendar.jsx"
 import Navbar from "../../components/Navbar/Navbar";
 import HistoryCard from "../../components/historyCard/HistoryCard.jsx";
+import CurrentTreatment from "../../components/currentTreatment/CurrentTreatment.jsx";
 import CardResume from "../../components/cardResume/cardResume.jsx";
 import TreatmentDetails from "../../components/treatmentDetails/TreatmentDetails.jsx";
 
@@ -31,9 +32,8 @@ const CalendarPage = () => {
             </div>
 
             <div className="calendar-right">
-                <h2>Tratamiento actual</h2>
+                <CurrentTreatment />
                 
-            
                 <HistoryCard />
             </div>
         </div>
