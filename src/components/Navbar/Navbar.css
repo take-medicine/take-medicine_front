@@ -1,8 +1,8 @@
 .header {
-  position: sticky;
-  z-index: 2000;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #e5e2d8;
+  background-color: white;
   }
 
 .navbar {
@@ -16,6 +16,7 @@
   font-family: "Playball";
   color: var(--primary-500);
   font-size: 2.5rem;
+  padding: 0 0 0 3rem;
 }
 
 .right {

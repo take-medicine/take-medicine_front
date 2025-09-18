@@ -1,5 +1,4 @@
-import React from 'react'
-import '../src/components/styles/Variables.css';
+import React, { useState } from 'react';
 import './App.css';
 import LogInPage from './pages/LogInPage/LogInPage';
 import CalendarPage from "./pages/Calendar/CalendarPage.jsx";
@@ -13,15 +12,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={
-          <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
-            <LogInPage />
-          </GoogleReCaptchaProvider>} />
+          <Route path="/login" element = {
+    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
+      <LogInPage />
   
-        <Route path="/calendar" element={<CalendarPage />} /> 
-
-        {/* Redirigir la raíz */}
-        <Route path="/" element={<Navigate to="/login" />} />
+    </GoogleReCaptchaProvider>
+    }
+    />
+      <Route path="/calendar" element={<CalendarPage />} /> 
       </Routes>
     </BrowserRouter>
   );

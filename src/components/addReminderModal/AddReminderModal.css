@@ -1,0 +1,242 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* podría usar --neutral-750 con opacidad si quieres */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-container {
+  background: var(--white);
+  border-radius: var(--border-radius-card);
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-title {
+  font-size: var(--h2-size);
+  font-weight: var(--h2-weight);
+  color: var(--neutral-750);
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--neutral-500);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: var(--neutral-250);
+  color: var(--neutral-750);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-750);
+  margin-bottom: 0.5rem;
+}
+
+.form-label.required::after {
+  content: " *";
+  color: var(--red);
+}
+
+.form-input {
+  padding: 0.75rem;
+  border: 2px solid var(--neutral-500);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: var(--white);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(0, 121, 200, 0.1);
+}
+
+.form-input.error {
+  border-color: var(--red);
+}
+
+.form-select {
+  padding: 0.75rem;
+  border: 2px solid var(--neutral-500);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(0, 121, 200, 0.1);
+}
+
+.form-textarea {
+  padding: 0.75rem;
+  border: 2px solid var(--neutral-500);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 4rem;
+  font-family: var(--montserrat);
+  transition: all 0.2s ease;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(0, 121, 200, 0.1);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-error {
+  color: var(--red);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.frequency-options {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.frequency-option {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--neutral-500);
+  border-radius: 2rem;
+  background: var(--white);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.frequency-option:hover {
+  border-color: var(--primary-500);
+  background-color: var(--primary-250);
+}
+
+.frequency-option.active {
+  border-color: var(--primary-500);
+  background-color: var(--primary-500);
+  color: var(--white);
+}
+
+.time-inputs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.time-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+.add-time-btn {
+  padding: 0.5rem 1rem;
+  border: 2px dashed var(--neutral-500);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--neutral-750);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.add-time-btn:hover {
+  border-color: var(--primary-500);
+  color: var(--primary-500);
+  background-color: var(--primary-250);
+}
+
+.time-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.remove-time-btn {
+  background: var(--red);
+  border: none;
+  color: var(--white);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.remove-time-btn:hover {
+  background: var(--red);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+
+
+.loading-spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-top: 2px solid var(--white);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
