@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./CalendarPage.css";
 import Calendar from "../../components/calendar/Calendar.jsx"
 import Navbar from "../../components/Navbar/Navbar";
+import HistoryCard from "../../components/historyCard/HistoryCard.jsx";
 
 const CalendarPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [medications, setMedications] = useState({
-        
 
     });
     
@@ -16,24 +16,23 @@ const CalendarPage = () => {
         <div className="calendar-container">
            
 
-            <section className="calendar-topleft">
-                <h2>Mi calendario</h2>
+            <div className="calendar-left">
                 <Calendar
                 selectedDate={selectedDate}
                 onDateChange={setSelectedDate}
                 medications={medications}
                 />
-            </section>
 
-            <section className="calendar-bottomleft">
-                <h2>Tomas de hoy</h2>
-            </section>
-            <section className="calendar-topright">
+                <div className="calendar-current">
+                    <h2>Tomas de hoy</h2>
+                </div>
+            </div>
+
+            <div className="calendar-right">
                 <h2>Tratamiento actual</h2>
-            </section>
-            <section className="calendar-bottomright">
-                <h2>Historial</h2>
-            </section>
+            
+                <HistoryCard />
+            </div>
         </div>
     </div>
     );

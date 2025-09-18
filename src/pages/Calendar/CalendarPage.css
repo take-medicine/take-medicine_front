@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(280px, 400px));
     grid-auto-rows: auto;
-    gap: 40px;
+    gap: var(--space-section);
     padding: 40px 20px;
     background-color:var(--neutral-500);
     margin:auto auto 0 auto;
@@ -10,6 +10,7 @@
     height:auto;
     box-sizing: border-box;
     justify-content: center;
+    font-family: var(--montserrat);
 
 }
 
@@ -44,9 +45,8 @@
 .calendar-topright h2,
 .calendar-bottomright h2 {
   margin: 0 0 15px 0;
-  font-size: 1.2rem;
-  color: var(--primary-750);
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  font-size: var(--h2-size);
+  color: var(--black);
   
 }
 

@@ -18,10 +18,7 @@ function App() {
             <LogInPage />
           </GoogleReCaptchaProvider>} />
   
-        <Route path="/calendar" element={<CalendarPage />} /> 
-
-        {/* Redirigir la raíz */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<CalendarPage />} /> 
       </Routes>
     </BrowserRouter>
   );
