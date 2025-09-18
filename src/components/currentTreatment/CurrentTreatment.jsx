@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CurrentTreatment.css';
-import CardResume from '../cardResume/CardResume';
+import CardResume from '../cardResume/CardResume.jsx';
 import TreatmentDetails from '../treatmentDetails/TreatmentDetails';
 
 export default function CurrentTreatment({ userId }) {
@@ -17,7 +17,7 @@ export default function CurrentTreatment({ userId }) {
               id: 1,
               medicationName: "Zoomig",
               dosage: "1 toma",
-              timeSlots: ["09:00h"],
+              time: ["09:00h"],
               description: "Medicamento para el tratamiento de migrañas. Tomar cuando aparezcan los primeros síntomas.",
               duration: "Según necesidad",
               days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
@@ -26,7 +26,7 @@ export default function CurrentTreatment({ userId }) {
               id: 2,
               medicationName: "Ibuprofeno",
               dosage: "2 tomas",
-              timeSlots: ["08:00h", "20:00h"],
+              time: ["08:00h", "20:00h"],
               description: "Antiinflamatorio para el dolor y la inflamación. Tomar con alimentos.",
               duration: "7 días",
               days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
@@ -35,7 +35,7 @@ export default function CurrentTreatment({ userId }) {
               id: 3,
               medicationName: "Vitamina D",
               dosage: "1 toma",
-              timeSlots: ["12:00h"],
+              time: ["12:00h"],
               description: "Suplemento vitamínico para fortalecer huesos y sistema inmunológico.",
               duration: "30 días",
               days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
@@ -97,7 +97,7 @@ export default function CurrentTreatment({ userId }) {
               key={medication.id}
               medicineName={medication.medicationName}
               dosage={medication.dosage}
-              time={medication.timeSlots[0]}
+              time={medication.time[0]}
               onClick={() => handleCardClick(medication)}
             />
           ))}
