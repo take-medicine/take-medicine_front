@@ -1,0 +1,47 @@
+.container {
+  max-width: 650px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.lista {
+  list-style: none;
+  padding: 0;
+}
+
+.listaItem {
+  border: 1px solid #ccc;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.listaItemInfo {
+  flex: 1;
+}
+
+.noTratamientos {
+  color: gray;
+  font-style: italic;
+  text-align: center;
+}
+
+.alerta {
+  color: white;
+  background-color: #ff9800;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
