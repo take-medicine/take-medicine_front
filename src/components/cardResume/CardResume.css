@@ -1,19 +1,22 @@
 .medication-card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 12px 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
+    border-radius: var(--border-radius-card);
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
-    border: 1px solid #e5e5e5;
+    border: none;
+    font-family: var(--montserrat);
   }
   
   .medication-card__content {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
+    justify-content: center;
+    gap: var(--space-button);
+    font-size: var(--h3-size);
+    font-weight: var(--h3-weight);
+    color: var(--neutral-750);
   }
   
   .medication-card__content span:not(:first-child) {
