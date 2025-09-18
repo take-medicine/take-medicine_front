@@ -35,6 +35,8 @@
   .loading-message {
     text-align: center;
     color: var(--neutral-750);
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
   }
   
   .no-appointments {
