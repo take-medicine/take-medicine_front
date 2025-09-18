@@ -10,26 +10,55 @@
 
 .treatment-details__container {
     width: 294px;
-    height: 294px;
+    min-height: 294px;
+    max-height: 80vh; 
+    overflow-y: auto; 
     background-color: var(--white);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     border-radius: var(--border-radius-card);
     font-family: var(--montserrat);
     color: var(--neutral-750);
     padding: 12px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    
+    gap: 12px;
 }
 
-.treament-details__name {
+.treatment-details__name {
     font-size: var(--h3-size);
     font-weight: var(--h3-weight);
+    margin: 0;
+    justify-content: left;
 }
 
-.reatment-details__description {
+.treatment-details__description {
     font-size: var(--body-size);
     font-weight: var(--body-weight);
+    align-items: left;
+    margin: 0;
 }
 
-.treament-details__subtitle {
+.treatment-details__subtitle {
     font-size: var(--button-size);
     font-weight: var(--button-weight);
+    margin: 0;
+}
+
+.treatment-details__info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+}
+
+.treatment-details__section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+}
+
+.treatment-details__section .treatment-details__subtitle {
+    margin-bottom: 4px;
+    color: var(--neutral-750);
 }

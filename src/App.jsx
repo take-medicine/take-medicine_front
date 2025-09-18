@@ -9,10 +9,19 @@ const RECAPTCHA_SITE_KEY = "6Lduq8wrAAAAALArzaoXKVG4QmBVgfhvQ4wxjL9m";
 
 function App() {
 
+  const mockTreatment = {
+    medicationName: "Insulina",
+    description: "Lo tomo para regular la cantidad de azúcar dos veces al día",
+    duration: "2 al día",
+    dosage: "Crónico",
+    time: ["09:00h", "17:00h"],
+    days: ["Lunes", "Miércoles", "Viernes"]
+  };
+
   return (
     <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_SITE_KEY}>
       {/*<LogInPage /> */}
-      <TreatmentDetails></TreatmentDetails>
+      <TreatmentDetails treatment={mockTreatment} ></TreatmentDetails>
     </GoogleReCaptchaProvider>
 
     

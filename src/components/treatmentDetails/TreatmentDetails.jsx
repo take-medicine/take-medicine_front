@@ -1,6 +1,6 @@
 import React from "react";
 import './TreatmentDetails.css';
-import '../pillDetail/PillDetail';
+import PillDetail from '../pillDetail/PillDetail';
 
 export default function TreatmentDetails( { treatment, onClose }) {
     if (!treatment) {
