@@ -259,8 +259,8 @@ const ModalAddReminder = ({
                 <form className="modal-form" onSubmit={handleSubmit}>
                     {/* Medication - Select */}
                     <div className="form-group">
-                        <label className="form-label required">Medication</label>
-                        <select
+                        <label htmlFor="medication" className="form-label required">Medication</label>
+                        <select id="medication"
                             className={`form-select ${errors.medication ? 'error' : ''}`}
                             value={showNewMedication ? 'new' :
                                 availableMedications.find(med => med.name === formData.medication)?.id || ''}
@@ -295,8 +295,9 @@ const ModalAddReminder = ({
 
                     {/* Dose */}
                     <div className="form-group">
-                        <label className="form-label required">Dose</label>
+                        <label htmlFor="dose" className="form-label required">Dose</label>
                         <input
+                            id="dose"
                             type="text"
                             className={`form-input ${errors.dose ? 'error' : ''}`}
                             value={formData.dose}
@@ -310,8 +311,8 @@ const ModalAddReminder = ({
 
                     {/* Frequency */}
                     <div className="form-group">
-                        <label className="form-label">Frequency</label>
-                        <div className="frequency-options">
+                        <label htmlFor="frequency" className="form-label">Frequency</label>
+                        <div id="frequency" className="frequency-options">
                             {frequencyOptions.map(option => (
                                 <button
                                     key={option.value}
@@ -327,11 +328,12 @@ const ModalAddReminder = ({
 
                     {/* Times */}
                     <div className="form-group">
-                        <label className="form-label">Times</label>
+                        <label htmlFor="times" className="form-label">Times</label>
                         <div className="time-inputs">
                             {formData.times.map((time, index) => (
                                 <div key={index} className="time-item">
                                     <input
+                                        id="times"
                                         type="time"
                                         className="form-input time-input"
                                         value={time}
@@ -367,8 +369,9 @@ const ModalAddReminder = ({
                     {/* Start date and duration */}
                     <div className="form-row">
                         <div className="form-group">
-                            <label className="form-label required">Start Date</label>
+                            <label htmlFor="start-date" className="form-label required">Start Date</label>
                             <input
+                                id="start-date"
                                 type="date"
                                 className={`form-input ${errors.startDate ? 'error' : ''}`}
                                 value={formData.startDate}
@@ -379,9 +382,10 @@ const ModalAddReminder = ({
                             )}
                         </div>
 
-                        <div className="form-group">
-                            <label className="form-label">Duration (days)</label>
+                        <div  className="form-group">
+                            <label  htmlFor="duration" className="form-label">Duration (days)</label>
                             <input
+                                id="duration"
                                 type="number"
                                 className="form-input"
                                 value={formData.duration}
