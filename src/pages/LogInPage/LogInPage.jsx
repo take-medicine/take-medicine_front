@@ -20,7 +20,8 @@ export default function LogInPage() {
 
     const handleRegisterSuccess = (userData) => {
         console.log('Registro exitoso:', userData);
-        setActiveModal('login');
+        handleCloseModal();
+        navigate('/');
     };
 
     const handleGoToRegister = () => {
