@@ -25,9 +25,7 @@ const ModalAddReminder = ({
     const [showNewMedication, setShowNewMedication] = useState(false);
 
     // Use medications passed as prop or default
-    const availableMedications = registeredMedications.length > 0
-        ? registeredMedications
-        : defaultMedications;
+    const availableMedications = registeredMedications || [];;
 
     const frequencyOptions = [
         { value: 'daily', label: 'Daily' },
@@ -238,9 +236,28 @@ const ModalAddReminder = ({
         };
     }, [isOpen, onClose]);
 
-    if (!isOpen) return null;
+   if (!isOpen) return null;
 
+// Si no hay medicamentos disponibles, mostrar mensaje
+if (availableMedications.length === 0) {
     return (
+        <div className="modal-overlay" onClick={handleOverlayClick}>
+            <div className="modal-container">
+                <div className="modal-header">
+                    <h2 className="modal-title">No hay medicamentos</h2>
+                    <button className="modal-close" onClick={onClose} type="button">✕</button>
+                </div>
+                <div className="modal-form" style={{padding: '20px', textAlign: 'center'}}>
+                    <p>Primero debes crear medicamentos antes de poder crear recordatorios.</p>
+                    <div className="modal-actions">
+                        <Button variant="secondary" onClick={onClose}>Cerrar</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+retunr (
         <div className="modal-overlay" onClick={handleOverlayClick}>
             <div className="modal-container">
                 <div className="modal-header">

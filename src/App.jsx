@@ -4,12 +4,18 @@ import './App.css';
 import LogInPage from './pages/LogInPage/LogInPage';
 import CalendarPage from "./pages/Calendar/CalendarPage.jsx";
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { authService } from './services/api';
 
 const RECAPTCHA_SITE_KEY = "6Lduq8wrAAAAALArzaoXKVG4QmBVgfhvQ4wxjL9m";
 
-function App() {
+// Componente para proteger rutas
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = authService.isAuthenticated();
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
 
+function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -18,10 +24,17 @@ function App() {
             <LogInPage />
           </GoogleReCaptchaProvider>} />
   
-        <Route path="/" element={<CalendarPage />} /> 
+        <Route path="/" element={
+          <ProtectedRoute>
+            <CalendarPage />
+          </ProtectedRoute>
+        } /> 
+        
+        {/* Redirigir rutas no encontradas */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;

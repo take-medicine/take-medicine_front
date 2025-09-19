@@ -1,5 +1,7 @@
 import React from 'react';
 import './HistoryCard.css';
+import { reminderService, authService } from '../../services/api';
+
 
 const HistorialTratamientos = ({ 
   tratamientos = [], 
@@ -168,15 +170,25 @@ export const useTratamientos = () => {
       setLoading(true);
       setError(null);
       
-      // Reemplaza con tu endpoint real
-      const response = await fetch('/api/tratamientos');
-      
-      if (!response.ok) {
-        throw new Error('Error al cargar los tratamientos');
+      const user = authService.getCurrentUser();
+      if (!user) {
+        throw new Error('Usuario no autenticado');
       }
       
-      const data = await response.json();
-      setTratamientos(data);
+      const data = await reminderService.getUserReminders(user.id);
+      
+      // Convertir recordatorios a formato de tratamientos
+      const tratamientosFormateados = data.map(reminder => ({
+        id: reminder.id,
+        medicamento: reminder.medicationName,
+        condicion: 'Recordatorio',
+        tipo: 'Medicación',
+        fechaInicio: reminder.createdAt,
+        fechaFin: null,
+        activo: true
+      }));
+      
+      setTratamientos(tratamientosFormateados);
     } catch (err) {
       setError(err.message);
       console.error('Error fetching tratamientos:', err);
@@ -184,14 +196,7 @@ export const useTratamientos = () => {
       setLoading(false);
     }
   };
-
-  React.useEffect(() => {
-    fetchTratamientos();
-  }, []);
-
-  return { tratamientos, loading, error, refetch: fetchTratamientos };
-};
-
+}
 // Componente container que maneja el estado
 export const HistorialTratamientosContainer = ({ 
   className, 

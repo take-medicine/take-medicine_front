@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import './SignInModal.css';
 import InputField from "../inputField/InputField";
 import Button from "../button/Button";
+import { authService } from '../../services/api';
 
 export default function SignInModal({ onClose, onSuccess, onGoToLogin }) {
     const { register, handleSubmit, formState: { errors }, watch } = useForm();
@@ -17,45 +18,34 @@ export default function SignInModal({ onClose, onSuccess, onGoToLogin }) {
         setMessage('');
 
         try {
-            console.log('Datos de registro:', data);
+            console.log('Intentando registrar usuario:', data.email);
             
-            // Preparar FormData para envío con imagen
-            const formData = new FormData();
-            formData.append("name", data.name);
-            formData.append("email", data.email);
-            formData.append("password", data.password);
-            if (data.image && data.image[0]) {
-                formData.append("image", data.image[0]);
-            }
-
-            // Aquí irá tu llamada al backend
-            /*
-            const response = await fetch('https://tu-api.com/register', {
-                method: 'POST',
-                body: formData,
+            // Llamada real al backend (sin imagen por ahora)
+            const response = await authService.register({
+                name: data.name,
+                email: data.email,
+                password: data.password
             });
 
-            const result = await response.json();
-
-            if (response.ok) {
-                onSuccess(result);
-            } else {
-                setMessage(result.message || 'Error al registrarse. Inténtalo de nuevo.');
-            }
-            */
-
-            // Simulación temporal 
+            console.log('Registro exitoso:', response);
+            setMessage('¡Registro exitoso! Iniciando sesión...');
+            
+            // Llamar al callback de éxito con los datos del usuario
             setTimeout(() => {
-                onSuccess({ 
-                    name: data.name, 
-                    email: data.email,
-                    id: Date.now() // ID simulado
-                });
-            }, 1500);
+                onSuccess(response.user);
+            }, 1000);
 
         } catch (error) {
-            console.error("Error al procesar el formulario:", error);
-            setMessage('No se pudo conectar con el servidor.');
+            console.error("Error al registrar usuario:", error);
+            
+            // Mostrar mensaje de error específico
+            if (error.message.includes('correo ya está registrado')) {
+                setMessage('Este email ya está registrado. Intenta con otro email.');
+            } else if (error.message.includes('fetch')) {
+                setMessage('No se pudo conectar con el servidor. Verifica que el backend esté corriendo.');
+            } else {
+                setMessage(error.message || 'Error al registrarse. Inténtalo de nuevo.');
+            }
         } finally {
             setIsLoading(false);
         }
@@ -84,7 +74,7 @@ export default function SignInModal({ onClose, onSuccess, onGoToLogin }) {
                 <form onSubmit={handleSubmit(onSubmit)} className="signin-modal__form">
                     
                     <div className="signin-modal__form-body">
-                        {/* Upload image */}
+                        {/* Upload image - Opcional por ahora */}
                         <div className="signin-modal__image-section">
                             <label className="signin-modal__image-label">
                                 {preview ? (
@@ -92,14 +82,14 @@ export default function SignInModal({ onClose, onSuccess, onGoToLogin }) {
                                 ) : (
                                     <div className="signin-modal__image-placeholder">
                                         <div>📁</div>
-                                        <span>Seleccionar imagen</span>
+                                        <span>Seleccionar imagen (opcional)</span>
                                     </div>
                                 )}
                                 <input
                                     type="file"
                                     accept="image/*"
                                     {...register("image", { 
-                                        required: "La imagen es obligatoria" 
+                                        required: false // Hacemos la imagen opcional
                                     })}
                                     onChange={handleImageChange}
                                     className="signin-modal__image-input"
@@ -141,7 +131,7 @@ export default function SignInModal({ onClose, onSuccess, onGoToLogin }) {
                                 placeholder="••••••••"
                                 {...register("password", {
                                     required: "La contraseña es obligatoria",
-                                    minLength: { value: 8, message: "Mínimo 8 caracteres" }
+                                    minLength: { value: 6, message: "Mínimo 6 caracteres" } // Cambié a 6 para que coincida con tu backend
                                 })}
                                 error={errors.password?.message}
                             />

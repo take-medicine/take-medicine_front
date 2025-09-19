@@ -64,3 +64,9 @@
     max-width: 100%;
   }
 }
+
+.floating-button {
+    position: fixed;
+    right: 60px;
+    z-index: 1000;
+}
